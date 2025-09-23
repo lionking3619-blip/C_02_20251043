@@ -1,9 +1,9 @@
 /******************************************************************************
 
 Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
-C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
-Code, Compile, Run and Debug online from anywhere in world.
+  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
+  Code, Compile, Run and Debug online from anywhere in world.
 
 *******************************************************************************/
 #include <stdio.h>
@@ -31,28 +31,30 @@ int main()
 		printf("원하는 메뉴를 선택하세요.(1.입고, 2.판매, 3.상품현황, 4.종료)\n");
 		scanf("%d", &menu);
 
-		if (menu == 1)
+		switch (menu)
 		{
+		case 1:
 			input(incoming);
-		}
-		else if (menu == 2)
-		{
+			break;
+		
+		case 2:
 			output(incoming, sale);
-		}
-		else if (menu == 3)
-		{
+			break;
+		
+		case 3:
 			prtstock(stock, incoming, sale);
 			total(incoming, sale);
 			itminmax(sale);
 			stocklack(stock);
-		}
-		else if (menu == 4)
-		{
+			break;
+		
+		case 4:
 			printf("[프로그램 종료됨]\n");
-		}
-		else
-		{
+			break;
+			
+		default:
 			printf("옳바른 숫자를 입력해주세요.\n");
+			break;
 		}
 	}
 	
@@ -67,8 +69,9 @@ void input(int* incoming)	//1.입고
 	printf("입고수량 입력 : 전체 상품 입고수량 입력은 1, 개별 상품 입력은 2를 선택\n");
 	scanf("%d", &kind);
 
-	if (kind == 1)
+	switch(kind)
 	{
+	case 1:
 		for (int i = 0; i < ITEM; i++)
 		{
 			scanf("%d", &incoming[i]);
@@ -78,9 +81,9 @@ void input(int* incoming)	//1.입고
 				i--;
 			}
 		}
-	}
-	else if (kind == 2)
-	{
+		break;
+	
+	case 2:
 		printf("상품 ID : ");
 		scanf("%d", &id);
 
@@ -90,10 +93,11 @@ void input(int* incoming)	//1.입고
 		{
 			printf("입고 수량은 0 이상이여야 합니다.\n");
 		}
-	}
-	else
-	{
+		break;
+	
+	default:
 		printf("옳바른 숫자를 입력해주세요.\n");
+		break;
 	}
 }
 
@@ -105,8 +109,9 @@ void output(int* incoming, int* sale)	//2.판매
 	printf("판매수량 입력 : 전체 상품 판매수량 입력은 1, 개별 상품 입력은 2를 선택\n");
 	scanf("%d", &kind);
 
-	if (kind == 1)
+	switch(kind)
 	{
+	case 1:
 		for (int i = 0; i < ITEM; i++)
 		{
 			scanf("%d", &sale[i]);
@@ -116,23 +121,24 @@ void output(int* incoming, int* sale)	//2.판매
 				i--;
 			}
 		}
-	}
-	else if (kind == 2)
-	{
+		break;
+	
+	case 2:
 		printf("상품 ID : ");
 		scanf("%d", &id);
 
-		printf("입고수량 : ");
+		printf("판매수량 : ");
 		scanf("%d", &sale[id - 1]);
 		if (sale[id - 1] < 0)
 		{
 			printf("판매 수량은 0 이상이여야 합니다.\n");
 		}
-	}
-	else
-	{
+		break;
+
+	default:
 		printf("옳바른 숫자를 입력해주세요.\n");
-	}
+		break;
+    }
 }
 
 //상품현황

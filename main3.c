@@ -36,28 +36,28 @@ int main()
 		case 1:
 			input(incoming);
 			break;
-		
+
 		case 2:
 			output(incoming, sale);
 			break;
-		
+
 		case 3:
 			prtstock(stock, incoming, sale);
 			total(incoming, sale);
 			itminmax(sale);
 			stocklack(stock);
 			break;
-		
+
 		case 4:
 			printf("[프로그램 종료됨]\n");
 			break;
-			
+
 		default:
 			printf("옳바른 숫자를 입력해주세요.\n");
 			break;
 		}
 	}
-	
+
 	return 0;
 }
 
@@ -65,15 +65,18 @@ void input(int* incoming)	//1.입고
 {
 	int kind = 0;
 	int id = 0;
+	int temp = 0;
 
 	printf("입고수량 입력 : 전체 상품 입고수량 입력은 1, 개별 상품 입력은 2를 선택\n");
 	scanf("%d", &kind);
 
-	switch(kind)
+	switch (kind)
 	{
 	case 1:
 		for (int i = 0; i < ITEM; i++)
 		{
+			id = i + 1;
+			printf("ID[%d] : ", id);
 			scanf("%d", &incoming[i]);
 			if (incoming[i] < 0)
 			{
@@ -82,19 +85,25 @@ void input(int* incoming)	//1.입고
 			}
 		}
 		break;
-	
+
 	case 2:
 		printf("상품 ID : ");
 		scanf("%d", &id);
 
+		id -= 1;
+
 		printf("입고수량 : ");
-		scanf("%d", &incoming[id - 1]);
-		if (incoming[id - 1] < 0)
+		scanf("%d", &temp);
+		if (temp < 0)
 		{
 			printf("입고 수량은 0 이상이여야 합니다.\n");
 		}
+		else
+		{
+			incoming[id] = temp;
+		}
 		break;
-	
+
 	default:
 		printf("옳바른 숫자를 입력해주세요.\n");
 		break;
@@ -105,15 +114,18 @@ void output(int* incoming, int* sale)	//2.판매
 {
 	int kind = 0;
 	int id = 0;
+	int temp = 0;
 
 	printf("판매수량 입력 : 전체 상품 판매수량 입력은 1, 개별 상품 입력은 2를 선택\n");
 	scanf("%d", &kind);
 
-	switch(kind)
+	switch (kind)
 	{
 	case 1:
 		for (int i = 0; i < ITEM; i++)
 		{
+			id = i + 1;
+			printf("ID[%d] : ", id);
 			scanf("%d", &sale[i]);
 			if (sale[i] < 0 || sale[i] > incoming[i])
 			{
@@ -122,23 +134,29 @@ void output(int* incoming, int* sale)	//2.판매
 			}
 		}
 		break;
-	
+
 	case 2:
 		printf("상품 ID : ");
 		scanf("%d", &id);
 
+		id -= 1;
+
 		printf("판매수량 : ");
-		scanf("%d", &sale[id - 1]);
-		if (sale[id - 1] < 0)
+		scanf("%d", &temp);
+		if (temp < 0 || temp > incoming[id])
 		{
-			printf("판매 수량은 0 이상이여야 합니다.\n");
+			printf("판매 수량은 0 이상, 입고 수량 이하이여야 합니다.\n");
+		}
+		else
+		{
+			sale[id] = temp;
 		}
 		break;
 
 	default:
 		printf("옳바른 숫자를 입력해주세요.\n");
 		break;
-    }
+	}
 }
 
 //상품현황

@@ -269,6 +269,8 @@ void inputname(char itname[ITEM][NAME])	//4.상품명입력
 	int ch;
 	int id;
 
+	getchar();
+
 	for (int i = 0; i < ITEM; i++)
 	{
 		int j = 0;

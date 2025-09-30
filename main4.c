@@ -31,7 +31,7 @@ int main()
 
 	while (menu != 5)
 	{
-		printf("원하는 메뉴를 선택하세요.(1.입고, 2.판매, 3.상품현황, 4.종료)\n");
+		printf("원하는 메뉴를 선택하세요.(1.입고, 2.판매, 3.상품현황, 4.상품명입력, 5.종료)\n");
 		scanf("%d", &menu);
 
 		switch (menu)
@@ -264,7 +264,7 @@ void stocklack(int* stock, char itname[ITEM][NAME])	//부족한 재고 출력
 	}
 }
 
-void inputname(char itname[ITEM][NAME])
+void inputname(char itname[ITEM][NAME])	//4.상품명입력
 {
 	int ch;
 	int id;

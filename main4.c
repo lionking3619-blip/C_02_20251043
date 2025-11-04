@@ -233,9 +233,7 @@ void itminmax(int* sale, char itname[ITEM][NAME])	//최대, 최소로 판매된 
 void stocklack(int* stock, char itname[ITEM][NAME])	//부족한 재고 출력
 {
 	int id = 0;
-	int j = 0;
-	char name[NAME];
-
+	
 	for (int i = 0; i < ITEM; i++)
 	{
 		int j = 0;
@@ -243,13 +241,7 @@ void stocklack(int* stock, char itname[ITEM][NAME])	//부족한 재고 출력
 		if (stock[i] <= 2)
 		{
 			id = i + 1;
-
-			while ((itname[i][j++]) != '\n')
-			{
-				name[j] = itname[i][j];
-			}
-
-			printf("상품 ID : %d, 상품명 : %s, 재고부족(%d)\n", id, name, stock[i]);
+			printf("상품 ID : %d, 상품명 : %s, 재고부족(%d)\n", id, itname[i], stock[i]);
 		}
 	}
 }

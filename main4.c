@@ -209,9 +209,7 @@ void itminmax(int* sale, char itname[ITEM][NAME])	//최대, 최소로 판매된 
 	int min = sale[0];
 	int max_id = 1;
 	int min_id = 1;
-	char max_name[NAME];
-	char min_name[NAME];
-
+	
 	for (int i = 0; i < ITEM; i++)
 	{
 		int j = 0;
@@ -220,24 +218,16 @@ void itminmax(int* sale, char itname[ITEM][NAME])	//최대, 최소로 판매된 
 		{
 			max = sale[i];
 			max_id = i + 1;
-			while ((itname[i][j++]) != '\n')
-			{
-				max_name[j] = itname[i][j];
-			}
 		}
 		if (min > sale[i])
 		{
 			min = sale[i];
 			min_id = i + 1;
-			while ((itname[i][j++]) != '\n')
-			{
-				min_name[j] = itname[i][j];
-			}
 		}
 	}
 
-	printf("가장 많이 판매된 상품 ID : %d, 상품명 %s: , 판매량 : %d\n", max_id, max_name, max);
-	printf("가장 적게 판매된 상품 ID : %d, 상품명 %s: , 판매량 : %d\n", min_id, min_name, min);
+	printf("가장 많이 판매된 상품 ID : %d, 상품명 %s: , 판매량 : %d\n", max_id, itname[max_id], max);
+	printf("가장 적게 판매된 상품 ID : %d, 상품명 %s: , 판매량 : %d\n", min_id, itname[min_id], min);
 }
 
 void stocklack(int* stock, char itname[ITEM][NAME])	//부족한 재고 출력

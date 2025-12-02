@@ -253,3 +253,11 @@ void inputname(char itname[ITEM][NAME])	//4.상품명입력
 
 	itname[i][j] = '\0';
 }
+
+void itemInfo(char itname[ITEM][NAME], int incoming[ITEM], int sale[ITEM], int price[ITEM])
+{
+	int id;
+	
+	printf("상품 ID : ");
+	scanf("%d", &id);
+}

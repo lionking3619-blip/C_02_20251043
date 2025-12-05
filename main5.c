@@ -1,10 +1,11 @@
 /******************************************************************************
 
 프로젝트 개발 현황
-완성 : 입고
-미완성 : 판매 / 개별현황
+완성 : 입고 / 판매
+미완성 : 개별현황
 
 *******************************************************************************/
+
 #include <stdio.h>
 
 #define ITEM 5
@@ -38,7 +39,7 @@ int main()
 		switch (menu)
 		{
 		case 1:
-			input(incoming, price, judge);
+			input(itname, incoming, price, judge);
 			break;
 
 		case 2:
@@ -46,7 +47,7 @@ int main()
 			break;
 
 		case 3:
-			
+
 			break;
 
 		case 4:
@@ -69,91 +70,61 @@ int main()
 	return 0;
 }
 
-void input(int* incoming, int* price, int* judge)	//1.입고
+void input(char itname[ITEM][NAME], int* incoming, int* price, int* judge)	//1.입고
 {
 	int id = 0;
 
 	printf("상품ID : ");
 	scanf("%d", &id);
-	
-	id = id - 1;
-	
-	inputname(itname)
-	
-	for (int i = 0; i < 1; i++)
-	{
-	    printf("입고량 : ");
-	    scanf("%d", incoming[id]);
-	
-	    if (incoming[id] < 0)
-	    {
-    		printf("입고 수량은 0 이상이여야 합니다.\n");
-    		i--;
-    	}
-	}
-	
-	for (int i = 0; i < 1; i++)
-	{
-	    printf("판매가격 : ");
-	    scanf("%d", price[id]);
 
-	    if (price[id] < 0)
-    	{
-	    	printf("판매가격은 0 이상이여야 합니다.\n");
-	    	i--;
-    	}
-	}
-	
+	id = id - 1;
+
+	inputname(itname, id);
+
+	do
+	{
+		printf("입고량 : ");
+		scanf("%d", incoming[id]);
+
+		if (incoming[id] < 0)
+		{
+			printf("입고 수량은 0 이상이여야 합니다.\n");
+		}
+	} while (incoming[id] < 0);
+
+	do
+	{
+		printf("판매가격 : ");
+		scanf("%d", price[id]);
+
+		if (price[id] < 0)
+		{
+			printf("판매가격은 0 이상이여야 합니다.\n");
+		}
+	} while (price[id] < 0);
+
 	judge[id] = 1;
 }
 
 void output(int* incoming, int* sale)	//2.판매
 {
-	int kind = 0;
 	int id = 0;
-	int temp = 0;
 
-	printf("판매수량 입력 : 전체 상품 판매수량 입력은 1, 개별 상품 입력은 2를 선택\n");
-	scanf("%d", &kind);
+	printf("상품 ID : ");
+	scanf("%d", &id);
 
-	switch (kind)
+	id -= 1;
+
+	do
 	{
-	case 1:
-		for (int i = 0; i < ITEM; i++)
-		{
-			id = i + 1;
-			printf("ID[%d] : ", id);
-			scanf("%d", &sale[i]);
-			if (sale[i] < 0 || sale[i] > incoming[i])
-			{
-				printf("판매 수량은 0 이상, 입고 수량 이하이여야 합니다.\n");
-				i--;
-			}
-		}
-		break;
-
-	case 2:
-		printf("상품 ID : ");
-		scanf("%d", &id);
-
-		id -= 1;
-
 		printf("판매수량 : ");
-		scanf("%d", &temp);
-		if (temp < 0 || temp > incoming[id])
-		{
-			printf("판매 수량은 0 이상, 입고 수량 이하이여야 합니다.\n");
-		}
-		else
-		{
-			sale[id] = temp;
-		}
-		break;
+		scanf("%d", sale[id]);
 
-	default:
-		printf("옳바른 숫자를 입력해주세요.\n");
-		break;
-	}
+		if (sale[id] < 0 || sale[id] > incoming[id])
+		{
+			printf("판매 수량은 0 이상, 입고 수량 이하여야 합니다.\n");
+		}
+	} while (sale[id] < 0 || sale[id] > incoming[id]);
 }
 
 //상품현황
@@ -199,7 +170,7 @@ void itminmax(int* sale, char itname[ITEM][NAME])	//최대, 최소로 판매된 
 	int min = sale[0];
 	int max_id = 1;
 	int min_id = 1;
-	
+
 	for (int i = 0; i < ITEM; i++)
 	{
 		int j = 0;
@@ -223,7 +194,7 @@ void itminmax(int* sale, char itname[ITEM][NAME])	//최대, 최소로 판매된 
 void stocklack(int* stock, char itname[ITEM][NAME])	//부족한 재고 출력
 {
 	int id = 0;
-	
+
 	for (int i = 0; i < ITEM; i++)
 	{
 		int j = 0;
@@ -236,10 +207,9 @@ void stocklack(int* stock, char itname[ITEM][NAME])	//부족한 재고 출력
 	}
 }
 
-void inputname(char itname[ITEM][NAME])	//4.상품명입력
+void inputname(char itname[ITEM][NAME], int id)	//4.상품명입력
 {
 	int ch;
-	int i = 0;
 	int j = 0;
 
 	getchar();
@@ -248,16 +218,16 @@ void inputname(char itname[ITEM][NAME])	//4.상품명입력
 
 	while ((ch = getchar()) != '\n' && ch != EOF)
 	{
-		itname[i][j++] = ch;
+		itname[id][j++] = ch;
 	}
 
-	itname[i][j] = '\0';
+	itname[id][j] = '\0';
 }
 
 void itemInfo(char itname[ITEM][NAME], int incoming[ITEM], int sale[ITEM], int price[ITEM])
 {
 	int id;
-	
+
 	printf("상품 ID : ");
 	scanf("%d", &id);
 }

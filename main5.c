@@ -1,8 +1,6 @@
 /******************************************************************************
 
-프로젝트 개발 현황
-완성 : 입고 / 판매
-미완성 : 개별현황
+완성
 
 *******************************************************************************/
 
@@ -11,13 +9,14 @@
 #define ITEM 5
 #define NAME 100
 
-void input(int* incoming);
+void input(char itname[ITEM][NAME], int* incoming, int* price, int* judge);
 void output(int* incoming, int* sale);
 void prtstock(int* stock, int* incoming, int* sale);
 void total(int* incoming, int* sale);
 void itminmax(int* sale, char itname[ITEM][NAME]);
 void stocklack(int* stock, char itname[ITEM][NAME]);
-void inputname(char itname[ITEM][NAME]);
+void inputname(char itname[ITEM][NAME], int id);
+void itemInfo(char itname[ITEM][NAME], int incoming[ITEM], int sale[ITEM], int price[ITEM]);
 
 int main()
 {
@@ -33,7 +32,7 @@ int main()
 
 	while (menu != 5)
 	{
-		printf("원하는 메뉴를 선택하세요.(1.입고, 2.판매, 3.개별현황, 4.전체현황, 5.종료)\n");
+		printf("원하는 메뉴를 선택하세요.(1.입고, 2.판매, 3.개별상품정보, 4.전체상품정보, 5.종료)\n");
 		scanf("%d", &menu);
 
 		switch (menu)
@@ -47,7 +46,7 @@ int main()
 			break;
 
 		case 3:
-
+			itemInfo(itname, incoming, sale, price);
 			break;
 
 		case 4:
@@ -84,7 +83,7 @@ void input(char itname[ITEM][NAME], int* incoming, int* price, int* judge)	//1.�
 	do
 	{
 		printf("입고량 : ");
-		scanf("%d", incoming[id]);
+		scanf("%d", &incoming[id]);
 
 		if (incoming[id] < 0)
 		{
@@ -95,7 +94,7 @@ void input(char itname[ITEM][NAME], int* incoming, int* price, int* judge)	//1.�
 	do
 	{
 		printf("판매가격 : ");
-		scanf("%d", price[id]);
+		scanf("%d", &price[id]);
 
 		if (price[id] < 0)
 		{
@@ -118,7 +117,7 @@ void output(int* incoming, int* sale)	//2.판매
 	do
 	{
 		printf("판매수량 : ");
-		scanf("%d", sale[id]);
+		scanf("%d", &sale[id]);
 
 		if (sale[id] < 0 || sale[id] > incoming[id])
 		{
@@ -227,7 +226,17 @@ void inputname(char itname[ITEM][NAME], int id)	//4.상품명입력
 void itemInfo(char itname[ITEM][NAME], int incoming[ITEM], int sale[ITEM], int price[ITEM])
 {
 	int id;
+	int total_sal;
 
 	printf("상품 ID : ");
 	scanf("%d", &id);
+
+	id -= 1;
+	total_sal = price[id] * sale[id];
+
+	printf("상품명 : %s\n", itname[id]);
+	printf("상품가격 : %d\n", price[id]);
+	printf("입고량 : %d\n", incoming[id]);
+	printf("판매량 : %d\n", sale[id]);
+	printf("총판매금액 : %d\n", total_sal);
 }
